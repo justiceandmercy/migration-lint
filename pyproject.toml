@@ -1,0 +1,29 @@
+[build-system]
+requires = ['setuptools>=61']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'migration-lint'
+version = '0.1.0'
+description = 'Audit SQL migration files for destructive or unsafe changes before production.'
+requires-python = '>=3.11'
+dependencies = []
+
+[project.scripts]
+migration-lint = 'main:main'
+
+[tool.setuptools]
+package-dir = {migration_lint = 'src/migration_lint', '' = 'src'}
+
+[tool.setuptools.packages.find]
+where = ['src']
+include = ['migration_lint*']
+
+[tool.migration-lint]
+include = ['**/*.sql']
+exclude = []
+extensions = ['.sql']
+ordering = 'path'
+output_format = 'text'
+fail_on = 'error'
+plugins = []
